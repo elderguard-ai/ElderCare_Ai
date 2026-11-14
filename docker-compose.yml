@@ -1,0 +1,38 @@
+# Backend + MySQL for development and demos: docker compose up --build
+# Settings are read from .env next to this file (copy .env.example).
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: elderguard_db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-elderguard-dev}
+    ports:
+      - "3307:3306"  # optional: inspect the data with MySQL Workbench on localhost:3307
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-elderguard-dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: development
+      DATABASE_URL: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD:-elderguard-dev}@db:3306/elderguard_db
+      SECRET_KEY: ${SECRET_KEY:-dev-only-insecure-secret-change-me}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8000}
+      TIMEZONE: Asia/Colombo
+      CORS_ORIGINS: "*"
+    ports:
+      - "8000:8000"
+
+volumes:
+  db_data:
