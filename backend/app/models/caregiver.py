@@ -45,4 +45,3 @@ class CaregiverElderlyLink(Base):
 
     def allows(self, permission: str) -> bool:
         return bool((self.permissions or DEFAULT_LINK_PERMISSIONS).get(permission, False))
-
