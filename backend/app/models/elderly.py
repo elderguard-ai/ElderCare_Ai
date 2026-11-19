@@ -87,3 +87,4 @@ class HospitalQRToken(Base):
     created_at = Column(DateTime(timezone=True), default=_utcnow)
 
     elderly = orm_relationship("ElderlyProfile", back_populates="qr_tokens")
+
