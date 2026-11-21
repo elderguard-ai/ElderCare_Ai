@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, Date, DateTime, Enum, ForeignKey, JSON, 
 from sqlalchemy.orm import relationship
 
 from ..db.base import Base
-
+//
 def _utcnow():
     return datetime.now(timezone.utc)
 
