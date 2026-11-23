@@ -9,7 +9,7 @@ from ..db.base import Base
 def _utcnow():
     return datetime.now(timezone.utc)
 
-//
+
 class EmergencyIncident(Base):
     __tablename__ = "emergency_incidents"
 
