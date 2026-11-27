@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from ..core.constants import DISCLAIMER, RISK_LEVELS, RISK_NORMAL
 from ..db.base import Base
 
-
+//
 class RiskAssessment(Base):
     __tablename__ = "risk_assessments"
 
