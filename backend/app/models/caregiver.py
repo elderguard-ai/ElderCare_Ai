@@ -8,7 +8,7 @@ from ..db.base import Base
 
 DEFAULT_LINK_PERMISSIONS = {"can_view_vitals": True, "can_manage_meds": True, "receive_alerts": True}
 
-
+//
 def _utcnow():
     return datetime.now(timezone.utc)
 
