@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship as orm_relationship
 
 from ..db.base import Base
 
-
+//
 def _utcnow():
     return datetime.now(timezone.utc)
 
